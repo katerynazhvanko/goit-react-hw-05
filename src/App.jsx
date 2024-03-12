@@ -1,6 +1,10 @@
+
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Navigation from "./components/Navigation/Navigation";
+import HomePage from "./pages/HomePage/HomePage";
+import MoviePage from "./pages/MoviePage/MoviePage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 export default function App() {
   return (
@@ -8,11 +12,9 @@ export default function App() {
       <h1>React Router</h1>
       <Navigation />
       <Routes>
-        <Route path="/" element={<div>Home page</div>} />
-        <Route path="/movie" element={<div>Movie page</div>} />
-        <Route path="/profile" element={<div>Profile page</div>} />
-        <Route path="/payments" element={<div>Payments page</div>} />
-        <Route path="*" element={<div>Not 404 found</div>} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/movie" element={<MoviePage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
   );

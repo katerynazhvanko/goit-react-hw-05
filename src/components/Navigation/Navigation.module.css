@@ -2,3 +2,9 @@
   display: flex;
   gap: 20px;
 }
+.link:hover {
+  text-decoration: underline;
+}
+.isActive {
+  color: red;
+}
