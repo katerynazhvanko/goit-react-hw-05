@@ -1,0 +1,28 @@
+.box {
+  display: flex;
+  padding-bottom: 50px;
+}
+.list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+.poster {
+  width: 250px;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+.textContainer {
+  width: 250px;
+  text-align: center;
+}
+.title {
+  overflow-wrap: break-word;
+  font-weight: 600;
+}
+.vote {
+  font-style: italic;
+}

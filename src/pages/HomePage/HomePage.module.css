@@ -1,0 +1,19 @@
+.title {
+  margin-bottom: 40px;
+  text-align: center;
+}
+.box {
+  display: flex;
+}
+.list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+.poster {
+  width: 250px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}

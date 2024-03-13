@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
-import { fetchFilms } from "../../films-api";
-import FilmsTrending from "../../components/FilmsTrending/FilmsTrending";
+import Loader from "../../components/Loader/Loader";
+
+import css from "./HomePage.module.css";
+import { fetchFilms } from "../../components/utils/films-api";
+import MovieList from "../../components/MovieList/MovieList";
 
 export default function HomePage() {
   const [films, setFilms] = useState([]);
@@ -8,27 +11,29 @@ export default function HomePage() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    async function getData() {
+    async function getFilms() {
       try {
         setIsLoading(true);
+        setError(false);
+        setFilms([]);
         const data = await fetchFilms();
         setFilms(data);
-        console.log(data);
+        setIsLoading(false);
       } catch (error) {
         setError(true);
       } finally {
         setIsLoading(false);
       }
     }
-    getData();
+    getFilms();
   }, []);
 
   return (
     <div>
-      <h1>Trending Films</h1>
-      {isLoading && <p>Loading, please wait...</p>}
+      <h1 className={css.title}>Trending Films</h1>
+      {isLoading && <Loader />}
       {error && <p>Ooop, error! Reload page!</p>}
-      <FilmsTrending films={films} />
+      <MovieList films={films} />
     </div>
   );
 }

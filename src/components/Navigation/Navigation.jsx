@@ -12,14 +12,8 @@ export default function Navigation() {
       <NavLink to="/" className={activeLink}>
         Home
       </NavLink>
-      <NavLink to="/movie" className={activeLink}>
+      <NavLink to="/movies" className={activeLink}>
         Movie
-      </NavLink>
-      <NavLink to="/profile" className={activeLink}>
-        Profile
-      </NavLink>
-      <NavLink to="/payments" className={activeLink}>
-        Payments
       </NavLink>
     </nav>
   );
