@@ -20,3 +20,13 @@ export const getMovieDetails = async (movie_id) => {
   const response = await axios.get(`/movie/${movie_id}?api_key=${KEY}`);
   return response.data;
 };
+
+export const getMovieCast = async (movie_id) => {
+  const response = await axios.get(`/movie/${movie_id}/credits?api_key=${KEY}`);
+  return response.data.cast;
+};
+
+export const getMovieReviews = async (movie_id) => {
+  const response = await axios.get(`/movie/${movie_id}/reviews?api_key=${KEY}`);
+  return response.data.reviews;
+};

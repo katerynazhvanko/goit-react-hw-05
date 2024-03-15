@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
 import { getMovieDetails } from "../../components/utils/films-api";
+
 import MovieCard from "../../components/MovieCard/MovieCard";
+import Loader from "../../components/Loader/Loader";
+import MovieCast from "../../components/MovieCast/MovieCast";
 
 export default function MovieDetailsPage() {
   const { filmId } = useParams();
@@ -26,7 +30,10 @@ export default function MovieDetailsPage() {
   }, [filmId]);
   return (
     <div>
+      {isLoading && <Loader />}
+      {error && <p>Ooop, error! Reload page!</p>}
       <MovieCard film={film} />
+      <MovieCast />
     </div>
   );
 }

@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
 import css from "./MovieList.module.css";
+import { default_img } from "../utils/base";
 
 export default function MovieList({ films }) {
-  const defaultImg =
-    "https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg";
-
   return (
     <div className={css.box}>
       {films.length > 0 && (
@@ -16,7 +14,7 @@ export default function MovieList({ films }) {
                   src={
                     film.poster_path
                       ? `https://image.tmdb.org/t/p/w500${film.poster_path}`
-                      : defaultImg
+                      : default_img
                   }
                   alt={film.title}
                   className={css.poster}
