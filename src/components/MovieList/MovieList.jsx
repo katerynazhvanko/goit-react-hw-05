@@ -21,7 +21,7 @@ export default function MovieList({ films }) {
                 />
                 <div className={css.textContainer}>
                   <p className={css.title}>{film.title}</p>
-                  <p className={css.vote}>Vote average: {film.vote_average}</p>
+                  <p className={css.vote}>User Score: {film.vote_average}</p>
                 </div>
               </Link>
             </li>

@@ -1,0 +1,21 @@
+.list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-top: 50px;
+  margin-bottom: 100px;
+  justify-content: center;
+}
+.item {
+  width: 500px;
+  height: 250px;
+  padding: 20px;
+  border: 2px solid #acacac;
+  background: #f7f7f7;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.review {
+  font-size: 13px;
+}

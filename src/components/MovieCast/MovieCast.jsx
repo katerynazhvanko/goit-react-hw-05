@@ -33,7 +33,7 @@ export default function MovieCast() {
     <>
       {isLoading && <Loader />}
       {error && <p>Ooop, error! Reload page!</p>}
-      <MovieCastList actors={actors} />;
+      {actors.length > 0 && <MovieCastList actors={actors} />}
     </>
   );
 }

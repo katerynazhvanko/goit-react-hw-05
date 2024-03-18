@@ -1,10 +1,11 @@
 import { default_img } from "../utils/base";
+import css from "./MovieCastList.module.css";
 
 export default function MovieCastList({ actors }) {
   return (
-    <ul>
+    <ul className={css.list}>
       {actors.map((actor) => (
-        <li key={actor.gender}>
+        <li key={actor.id} className={css.item}>
           <img
             src={
               actor.profile_path
@@ -12,9 +13,10 @@ export default function MovieCastList({ actors }) {
                 : default_img
             }
             alt={actor.original_name}
+            className={css.photo}
           />
-          <h2>{actor.original_name}</h2>
-          <h3>Character: {actor.character}</h3>
+          <h3 className={css.name}>{actor.original_name}</h3>
+          <h4 className={css.character}>Character: {actor.character}</h4>
         </li>
       ))}
     </ul>

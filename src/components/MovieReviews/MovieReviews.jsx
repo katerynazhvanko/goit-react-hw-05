@@ -2,6 +2,9 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getMovieReviews } from "../utils/films-api";
 
+import Loader from "../../components/Loader/Loader";
+import MovieReviewsList from "../MovieReviewsList/MovieReviewsList";
+
 export default function MovieReviews() {
   const { filmId } = useParams();
   const [reviews, setReviews] = useState([]);
@@ -13,7 +16,7 @@ export default function MovieReviews() {
       try {
         setIsLoading(true);
         setError(false);
-        const data = getMovieReviews(filmId);
+        const data = await getMovieReviews(filmId);
         setReviews(data);
         console.log(data);
       } catch (error) {
@@ -27,7 +30,9 @@ export default function MovieReviews() {
 
   return (
     <>
-      <p>{reviews}</p>
+      {isLoading && <Loader />}
+      {error && <p>Ooop, error! Reload page!</p>}
+      {reviews.length > 0 && <MovieReviewsList reviews={reviews} />}
     </>
   );
 }

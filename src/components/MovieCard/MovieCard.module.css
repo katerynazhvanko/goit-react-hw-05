@@ -1,0 +1,32 @@
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 30px;
+}
+.button {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.4);
+}
+.button:hover,
+.button:focus {
+  box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+}
+.thumb {
+  display: flex;
+}
+.poster {
+  margin-right: 20px;
+  border-radius: 5px;
+}
+.title {
+  margin-bottom: 15px;
+}
+.score {
+  margin-bottom: 10px;
+}
+.text {
+  margin-bottom: 10px;
+}
