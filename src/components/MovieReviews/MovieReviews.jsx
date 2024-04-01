@@ -32,7 +32,11 @@ export default function MovieReviews() {
     <>
       {isLoading && <Loader />}
       {error && <p>Ooop, error! Reload page!</p>}
-      {reviews.length > 0 && <MovieReviewsList reviews={reviews} />}
+      {reviews.length > 0 ? (
+        <MovieReviewsList reviews={reviews} />
+      ) : (
+        <p>No any information</p>
+      )}
     </>
   );
 }

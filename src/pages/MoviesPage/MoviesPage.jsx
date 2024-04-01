@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { searchFilms } from "../../components/utils/films-api";
 
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -10,6 +11,16 @@ export default function MoviesPage() {
   const [films, setFilms] = useState([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [params, setSearchParams] = useSearchParams();
+  const filmFilter = params.get("movie") ?? " ";
+
+  const filterMovies = films.filter((film) =>
+    film.movie.toLowerCase().includes(filmFilter.toLowerCase())
+  );
+
+  const handleSubmit = (value) => {
+    setSearchParams({ query: value });
+  };
 
   const handleSearch = async (newFilm) => {
     try {
@@ -28,10 +39,14 @@ export default function MoviesPage() {
 
   return (
     <>
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar
+        onSearch={handleSearch}
+        changeFilmParams={handleSubmit}
+        filmFilter={filmFilter}
+      />
       {isLoading && <Loader />}
       {error && <p>Ooop, error! Reload page!</p>}
-      {films.length > 0 && <MovieList films={films} />}
+      {films.length > 0 && <MovieList films={filterMovies} />}
       <Toaster position="top-right" />
     </>
   );
