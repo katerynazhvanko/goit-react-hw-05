@@ -1,20 +1,20 @@
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import css from "./SearchBar.module.css";
 import toast from "react-hot-toast";
 
-export default function SearchBar({ onSearch, changeFilmParams, filmFilter }) {
-  const [filter, setFilter] = useSearchParams();
-  const userQuery = filter.get("query") ?? "";
+export default function SearchBar() {
+  const [isActiveBtn, setIsActiveBtn] = useState(false);
+  const [params, setParams] = useSearchParams();
+  const userQuery = params.get("query") ?? "";
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const form = e.target.elements.search.value;
-  //   if (form === "") {
-  //     return toast.error("Add valid query!");
-  //   }
-  //   onSearch(form);
-  //   console.log(form);
-  // };
+  const onChange = (e) => {
+    const query = e.target.value;
+    if (query.trim() === "") {
+      setIsActiveBtn(false);
+    }
+    setIsActiveBtn(true);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,8 +22,8 @@ export default function SearchBar({ onSearch, changeFilmParams, filmFilter }) {
     if (query.trim() === "") {
       return toast.error("Add valid query!");
     }
-    filter.set("query", query.trim());
-    setFilter(filter);
+    params.set("query", query.trim());
+    setParams(params);
   };
   return (
     <form className={css.form} onSubmit={handleSubmit}>
@@ -34,12 +34,14 @@ export default function SearchBar({ onSearch, changeFilmParams, filmFilter }) {
         autoComplete="off"
         autoFocus
         className={css.input}
-        value={filmFilter}
-        onChange={(e) => changeFilmParams(e.target.value)}
+        defaultValue={userQuery}
+        onChange={onChange}
       />
-      <button type="submit" className={css.button}>
-        Search
-      </button>
+      {isActiveBtn && (
+        <button type="submit" className={css.button}>
+          Search
+        </button>
+      )}
     </form>
   );
 }

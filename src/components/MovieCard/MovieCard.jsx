@@ -5,9 +5,6 @@ import { default_img } from "../utils/base";
 export default function MovieCard({ film }) {
   return (
     <div className={css.container}>
-      <button type="button" className={css.button}>
-        Go back
-      </button>
       <div className={css.thumb}>
         <img
           src={

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { searchFilms } from "../../components/utils/films-api";
 
@@ -11,42 +11,35 @@ export default function MoviesPage() {
   const [films, setFilms] = useState([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [params, setSearchParams] = useSearchParams();
-  const filmFilter = params.get("movie") ?? " ";
+  const [query] = useSearchParams();
 
-  const filterMovies = films.filter((film) =>
-    film.movie.toLowerCase().includes(filmFilter.toLowerCase())
-  );
+  const useQuery = query.get("query") ?? " ";
 
-  const handleSubmit = (value) => {
-    setSearchParams({ query: value });
-  };
+  useEffect(() => {
+    if (!useQuery) return;
 
-  const handleSearch = async (newFilm) => {
-    try {
-      setIsLoading(true);
-      setError(false);
-      setFilms([]);
-      const data = await searchFilms(newFilm);
-      setFilms(data);
-      setIsLoading(false);
-    } catch (error) {
-      setError(true);
-    } finally {
-      setIsLoading(false);
+    async function getMovies() {
+      try {
+        setIsLoading(true);
+        setError(false);
+        setFilms([]);
+        const data = await searchFilms(useQuery);
+        setFilms(data);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setIsLoading(false);
+      }
     }
-  };
+    getMovies();
+  }, [useQuery]);
 
   return (
     <>
-      <SearchBar
-        onSearch={handleSearch}
-        changeFilmParams={handleSubmit}
-        filmFilter={filmFilter}
-      />
+      <SearchBar />
       {isLoading && <Loader />}
       {error && <p>Ooop, error! Reload page!</p>}
-      {films.length > 0 && <MovieList films={filterMovies} />}
+      {films.length > 0 && <MovieList films={films} />}
       <Toaster position="top-right" />
     </>
   );
