@@ -36,6 +36,7 @@ export default function SearchBar() {
         className={css.input}
         defaultValue={userQuery}
         onChange={onChange}
+        placeholder="Search"
       />
       {isActiveBtn && (
         <button type="submit" className={css.button}>

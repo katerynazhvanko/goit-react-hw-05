@@ -1,0 +1,16 @@
+.backlink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 110px;
+  margin-left: 40px;
+  margin-top: 15px;
+
+  border: none;
+  border-radius: 7px;
+  background-color: #ebecee;
+  color: #000000;
+  padding: 7px;
+  font-weight: bold;
+  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.4);
+}

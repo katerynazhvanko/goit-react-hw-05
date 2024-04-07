@@ -1,22 +1,29 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import {
   NavLink,
   Outlet,
   useParams,
-  Link,
   useLocation,
+  Link,
 } from "react-router-dom";
 
 import { getMovieDetails } from "../../components/utils/films-api";
 
 import MovieCard from "../../components/MovieCard/MovieCard";
 import Loader from "../../components/Loader/Loader";
+import css from "./MovieDetailsPage.module.css";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
 
 export default function MovieDetailsPage() {
   const { filmId } = useParams();
   const [film, setFilm] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+
+  const location = useLocation();
+  const backLinkRef = useRef(location.state ?? "/");
+  console.log(backLinkRef.current);
+
   useEffect(() => {
     async function getMovieById() {
       try {
@@ -34,12 +41,11 @@ export default function MovieDetailsPage() {
     getMovieById();
   }, [filmId]);
 
-  const location = useLocation();
-  console.log(location);
   return (
     <>
-      <Link to="/">
-        <button type="button">Go back</button>
+      <Link to={backLinkRef.current} className={css.backlink}>
+        <IoArrowBackCircleOutline />
+        Go back
       </Link>
 
       <div style={{ padding: "20px" }}>
@@ -63,7 +69,9 @@ export default function MovieDetailsPage() {
             </li>
           </ul>
         </div>
-        <Outlet />
+        <Suspense fallback={<Loader />}>
+          <Outlet />
+        </Suspense>
       </div>
     </>
   );
